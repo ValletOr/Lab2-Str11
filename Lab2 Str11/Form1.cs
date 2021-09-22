@@ -15,10 +15,18 @@ namespace Lab2_Str11
         public Form1()
         {
             InitializeComponent();
+            //Вводим значения с прошлого запуска
+            word1Box.Text = Properties.Settings.Default.word1Box;
+            word2Box.Text = Properties.Settings.Default.word2Box;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //Сохранение введённых значений.
+            Properties.Settings.Default.word1Box = word1Box.Text;
+            Properties.Settings.Default.word2Box = word2Box.Text;
+            Properties.Settings.Default.Save();
+
             //Проверка на пустоту в первом слове.
             if (string.IsNullOrEmpty(word1Box.Text))
             {
