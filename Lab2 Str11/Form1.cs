@@ -19,7 +19,15 @@ namespace Lab2_Str11
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            //Проверка на пустоту в первом слове.
+            if (string.IsNullOrEmpty(word1Box.Text))
+            {
+                MessageBox.Show("Первое слово не введено, невозможно вывести результат.", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                MessageBox.Show(Logic.Execution(word1Box.Text, word2Box.Text), "Результат");
+            }
         }
     }
 
@@ -29,6 +37,11 @@ namespace Lab2_Str11
         {
             string outMessage = "", buffer = "";
             bool trigger = false;
+            int j;
+
+            //Приведение букв в словах к одному регистру (нижнему)
+            word1 = word1.ToLower();
+            word2 = word2.ToLower();
 
             //Чистка первого слова от повторяющихся букв
             for (int i = 0; i < word1.Length; i++)
@@ -44,15 +57,16 @@ namespace Lab2_Str11
             for (int i = 0; i < word1.Length; i++)
             {
                 trigger = false;
-                for (int j = 0; j < word2.Length; j++)
+                j = 0;
+                outMessage += word1[i]+" - ";
+                while ((trigger != true) && (j < word2.Length))
                 {
                     if (word1[i] == word2[j])
                     {
                         trigger = true;
                         outMessage += "да";
-                        break;
                     }
-
+                    j++;
                 }
                 if (!trigger)
                 {
@@ -60,10 +74,11 @@ namespace Lab2_Str11
                 }
                 if (i != word1.Length - 1)
                 {
-                    outMessage += " ";
+                    outMessage += "\n";
                 }
             }
 
+            //Возврат значения.
             return outMessage;
         }
     }
