@@ -34,8 +34,32 @@ namespace Lab2_Str11
             }
             else
             {
-                MessageBox.Show(Logic.Execution(word1Box.Text, word2Box.Text), "Результат");
+                resultBox.Text = Logic.Execution(word1Box.Text, word2Box.Text);
+                word1Box.Text = "";
+                word2Box.Text = "";
             }
+        }
+
+        private void word1Box_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                word2Box.Focus();
+            }
+        }
+
+        private void word2Box_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                button1.PerformClick();
+                word1Box.Focus();
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Даны два слова. Для каждой буквы первого слова определить, входит ли она во второе слово. Повторяющиеся буквы первого слова не рассматривать. Например, если заданные слова процессор и информация, то для букв первого из них ответом должно быть: нет да да да нет нет.");
         }
     }
 
@@ -82,7 +106,7 @@ namespace Lab2_Str11
                 }
                 if (i != word1.Length - 1)
                 {
-                    outMessage += "\n";
+                    outMessage += "\r\n";
                 }
             }
 
